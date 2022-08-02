@@ -1,1 +1,4 @@
 name: 'Multi Docker Container Single DigitalOcean Droplet Pipeline'
+description: 'This is a CI/CD pipeline to upload and run an image to DigitalOcean, and can be used with multiple simultaneous containers.'
+icon: 'upload-cloud'
+color: 'green'
