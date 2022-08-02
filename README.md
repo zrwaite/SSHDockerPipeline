@@ -7,5 +7,5 @@
 1. Runs new image at port
 1. Cleans up loose images
 
-_ g++ getContainerId.cpp -o getContainerId
-_ sudo chmod +x test.sh
+- g++ getContainerId.cpp -o getContainerId
+- sudo chmod +x test.sh
