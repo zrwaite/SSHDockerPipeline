@@ -1,13 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
-typedef struct column
-{
-	std::string name;
-	int index;
-	std::vector<std::string> values;
-} column;
+#include "docker.hpp"
 
 std::string removeVersion(std::string str)
 {
@@ -83,14 +77,8 @@ void populateColumns(std::vector<column> &columns)
 	}
 }
 
-int main(int argc, char *argv[])
+std::string getContainerId(std::string containerName)
 {
-	if (argc != 2)
-	{
-		std::cout << "Usage: getContainerId <containerName>" << std::endl;
-		return 1;
-	}
-	std::string containerName = argv[1];
 	std::string line;
 	std::vector<column> columns = createColumns();
 	populateColumns(columns);
