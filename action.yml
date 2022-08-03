@@ -27,3 +27,7 @@ inputs:
 branding: 
   icon: 'upload-cloud'
   color: 'green'
+
+runs:
+  using: 'node16'
+  main: 'main.js'

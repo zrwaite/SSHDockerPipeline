@@ -1,4 +1,4 @@
-sudo docker ps | ./getContainerId $1 | xargs docker stop
+docker ps | ./getContainerId $1 | xargs docker stop
 
 docker system prune -f
 
