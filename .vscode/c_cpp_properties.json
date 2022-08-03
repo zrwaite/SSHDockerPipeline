@@ -3,7 +3,7 @@
         {
             "name": "macos-gcc-arm64",
             "includePath": [
-                "${workspaceFolder}/**",
+                "${workspaceFolder}/src/**",
                 "/opt/homebrew/Cellar/libssh/0.9.6/include"
             ],
             "compilerPath": "/usr/bin/gcc",
