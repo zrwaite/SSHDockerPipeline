@@ -9,8 +9,6 @@ find_package(libssh CONFIG REQUIRED)
 add_subdirectory(ssh_server)
 add_subdirectory(validator)
 
-
-
 add_executable(ssh_deploy main.cpp)
 
 target_include_directories(ssh_server PUBLIC ssh_server)

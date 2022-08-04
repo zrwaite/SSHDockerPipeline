@@ -49,7 +49,8 @@ bool validateImageName (char* imageName) {
     return false;
 }
 bool validatePort (char* port){
-    for (t = imageName; *t != '\0'; t++) {
+	char * t; // first copy the pointer to not change the original
+    for (t = port; *t != '\0'; t++) {
 		if (!isNumeric(*t)) return false;
 	}
 	return true;
