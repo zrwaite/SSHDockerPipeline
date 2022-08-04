@@ -4,7 +4,7 @@
 #include "connection.hpp"
 #include "verify.hpp"
 
- SSHConnection::SSHConnection(std::vector<char*> commands) {
+ SSHConnection::SSHConnection(std::vector<const char*> commands) {
     this->commands = commands;
 }
 
@@ -73,7 +73,7 @@ void SSHConnection::deleteChannel() {
 }
 
 int SSHConnection::runCommands() {
-    for (char* command : this->commands) {
+    for (const char* command : this->commands) {
         this->createChannel();
         if (this->runCommand(command) != SSH_OK) {
             this->deleteChannel();
@@ -84,7 +84,7 @@ int SSHConnection::runCommands() {
     return SSH_OK;
 }
 
-int SSHConnection::runCommand(char* command){
+int SSHConnection::runCommand(const char* command){
     std::cout << "running command: " << command << std::endl;
     char buffer[256];
     int nbytes;

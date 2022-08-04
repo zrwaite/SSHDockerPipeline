@@ -1,4 +1,1 @@
-#include <libssh/libssh.h>
-#include <string>
-int connect(char* host, char* port, char* username, char* password);
-int show_remote_processes(ssh_session session);
+int runDeploymentCommands(char* imageName, char* port, char* sshHost, char* sshPort, char* sshUser, char* sshPassword);

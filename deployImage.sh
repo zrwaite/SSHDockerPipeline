@@ -1,4 +1,4 @@
-docker ps | ./getContainerId $1 | xargs docker stop
+docker container ls  | grep $1 | awk '{print $1}' | xargs docker stop
 
 docker system prune -f
 

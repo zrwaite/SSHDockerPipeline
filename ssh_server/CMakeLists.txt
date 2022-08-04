@@ -7,3 +7,8 @@ add_library(
 	connection.hpp
 	connection.cpp
 )
+
+
+include_directories(docker)
+add_subdirectory(docker)
+target_include_directories(docker PUBLIC docker)

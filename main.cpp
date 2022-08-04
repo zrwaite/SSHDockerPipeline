@@ -1,18 +1,12 @@
-#include <iostream>
 #include <vector>
-#include "docker.hpp"
+#include <iostream>
 #include "ssh_server.hpp"
-#include "connection.hpp"
 
-int main()
+int main(int argc, char *argv[])
 {
-    std::vector<char*> commands ;
-    commands.push_back("ls");
-    commands.push_back("ls -a");
-    commands.push_back("docker ps");
-    commands.push_back("docker system prune -f");
-    SSHConnection* conn = new SSHConnection(commands);
-    std::cout << "Created connection succesfully" << std::endl;
-    conn->connectAndRun("www.zacwaite.xyz", "22", "zac", "");
-    delete conn;
+    if (argc != 7) {
+        std::cout << "Usage: " << argv[0] << " <image_name> <port> <ssh_host> <ssh_port> <ssh_user> <ssh_password>" << std::endl;
+        return 1;
+    }
+    return runDeploymentCommands("ubuntu", "8004", "www.zacwaite.xyz", "22", "zac", "");
 }
