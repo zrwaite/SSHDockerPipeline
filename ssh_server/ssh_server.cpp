@@ -74,16 +74,14 @@ int connect(char* host, char* port, char* username, char* password)
     exit(-1);
   }
 
-  if (verify_host(my_ssh_session) < 0)
-  {
-    std::cout << "Failed to verify host" << std::endl;
-    ssh_disconnect(my_ssh_session);
-    ssh_free(my_ssh_session);
-    exit(-1);
-  }
+    if (verify_host(my_ssh_session) < 0)
+    {
+        std::cout << "Failed to verify host" << std::endl;
+        ssh_disconnect(my_ssh_session);
+        ssh_free(my_ssh_session);
+        exit(-1);
+    }
 
-    std::cout << password << std::endl;
-//   char *password = "";
   rc = ssh_userauth_password(my_ssh_session, NULL, password);
   if (rc != SSH_AUTH_SUCCESS)
   {
@@ -94,8 +92,8 @@ int connect(char* host, char* port, char* username, char* password)
     exit(-1);
   }
   show_remote_processes(my_ssh_session);
-  
-  ssh_disconnect(my_ssh_session);
-  ssh_free(my_ssh_session);
+
+    ssh_disconnect(my_ssh_session);
+    ssh_free(my_ssh_session);
   return 0;
 }

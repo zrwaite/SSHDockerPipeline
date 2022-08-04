@@ -4,4 +4,6 @@ add_library(
 	ssh_server.cpp
 	verify.hpp
 	verify.cpp
+	connection.hpp
+	connection.cpp
 )
