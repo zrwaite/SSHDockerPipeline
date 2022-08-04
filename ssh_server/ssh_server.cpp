@@ -7,29 +7,28 @@
 int runDeploymentCommands(char* imageName, char* port, char* sshHost, char* sshPort, char* sshUser, char* sshPassword) {
 	std::string imageNameString(imageName);
 	const char* versionLessImage = removeVersion(imageNameString).c_str();
-	std::vector<const char*> commands;
+
+	// Pull image
+	std::string pullImage = "docker pull " + std::string(imageName);
 
 	// Stop runnning container of same image
-	std::string stopContainerCommand = "docker container ls | grep ";
-	stopContainerCommand.append(versionLessImage);
-	stopContainerCommand.append(" | awk '{print $1}' | xargs docker container stop");
-    commands.push_back(stopContainerCommand.c_str());
+	std::string stopContainer = "docker container ls | grep " + std::string(versionLessImage) + " | awk '{print $1}' | xargs docker container stop";
 
 	// Delete stopped conatainers
-    commands.push_back("docker system prune -f");
+    std::string deleteContainers = "docker system prune -f";
 
 	// Run new image
-	std::string runContinaerCommand = "docker run -d -p ";
-	runContinaerCommand.append(port);
-	runContinaerCommand.append(":");
-	runContinaerCommand.append(port);
-	runContinaerCommand.append(" ");
-	runContinaerCommand.append(imageName);
-    commands.push_back(runContinaerCommand.c_str());
+	std::string runContainer = "docker run -d -p " + std::string(port) + ":" + std::string(port) + " " + std::string(imageName);
 
 	// Deletes unused images
-    commands.push_back("docker image prune -f -a");
-	
+    std::string deleteImages = "docker image prune -f -a";
+
+	// Links into one command that assures that the process stops if one of the commands fails
+	std::string linkedCommand = pullImage + " && " + stopContainer + " && " + deleteContainers + " && " + runContainer + " && " + deleteImages;
+
+	std::vector<const char*> commands;
+	commands.push_back(linkedCommand.c_str());
+
     SSHConnection* conn = new SSHConnection(commands);
     std::cout << "Created connection succesfully" << std::endl;
     conn->connectAndRun(sshHost, sshPort, sshUser, sshPassword);
