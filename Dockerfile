@@ -1,4 +1,4 @@
-FROM gcc:9
+FROM gcc:11.1.0
 
 ARG image_name
 ARG port
