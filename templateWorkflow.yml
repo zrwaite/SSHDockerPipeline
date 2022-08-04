@@ -1,0 +1,47 @@
+name: SSH Pipeline Docker Workflow
+author: 'Zac Waite and Hargun Mujral'
+description: 'This is a sample workflow that runs a docker container via ssh to a remote server.'
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build-and-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: populate .env file
+      run: |
+          touch server/.env
+          echo "${{ secrets.ENV_FILE }}" >> server/.env
+          cat server/.env
+    - name: docker login
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKERHUB_ACCESS_TOKEN}}
+      run: 
+        docker login -u $DOCKER_USER -p $DOCKER_PASSWORD
+    - name: Build the Docker image
+      run: docker compose build
+    - name: Get image name from docker-compose.yml
+      id: image-name
+      uses: KJ002/read-yaml@main
+      with:
+        file: './docker-compose.yml'
+        key-path: '["services", "server", "image"]'
+    - name: Docker push
+      run: docker push ${{ steps.image-name.outputs.data }}
+    - name: Deploy to server via SSH action
+      uses: zrwaite/SSHDockerPipeline@v1.0.3
+      with:
+        image_name: ${{ secrets.IMAGE_NAME }}
+        port: ${{ secrets.PORT }}
+        ssh_host: ${{ secrets.SSH_HOST }}
+        ssh_port: ${{ secrets.SSH_PORT }}
+        ssh_user: ${{ secrets.SSH_USER }}
+        ssh_password: ${{ secrets.SSH_PASSWORD }}
