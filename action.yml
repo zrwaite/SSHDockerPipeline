@@ -2,32 +2,38 @@ name: 'Multi Docker Container Single Host Pipeline'
 description: 'This is a CI/CD pipeline to upload and run an image to DigitalOcean, and can be used with multiple simultaneous containers.'
 author: 'Zac Waite and Hargun Mujral'
 inputs: 
-  docker_user:
-    description: 'docker username'
+  image_name:
+    description: 'name of the docker image'
     required: true
-  docker_access_token:
-    description: 'docker access token'
-    required: true
-  service_name:
-    description: 'name of docker-compose.yml service'
-    required: true
-  envs:
-    description: 'env file'
+  port:
+    description: 'port for running the container'
     required: true
   ssh_host: 
     description: 'host [ip or domain] of the ssh server'
     required: true
+  ssh_port: 
+    description: 'port for the ssh server'
+    required: true
+  ssh_user: 
+    description: 'username of the ssh server'
+    required: true  
   ssh_password:
     description: 'password of the ssh server'
     required: true
-  ssh_username: 
-    description: 'username of the ssh server'
-    required: true
+
 
 branding: 
   icon: 'upload-cloud'
   color: 'green'
 
 runs:
-  using: 'node16'
-  main: 'main.js'
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.image_name }}
+    - ${{ inputs.port }}
+    - ${{ inputs.ssh_host }}
+    - ${{ inputs.ssh_port }}
+    - ${{ inputs.ssh_user }}
+    - ${{ inputs.ssh_password }}
+
