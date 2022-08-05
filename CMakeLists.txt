@@ -1,9 +1,7 @@
 cmake_minimum_required(VERSION 3.10)
 project(MultiDockerServerPipeline VERSION 1.0.0)
 
-include(.env.cmake)
-
-include_directories(${LIBSSH_PATH}/include)
+include_directories(/usr/include)
 find_package(libssh CONFIG REQUIRED)
 
 add_subdirectory(ssh_server)

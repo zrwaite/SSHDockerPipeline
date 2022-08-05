@@ -1,1 +1,0 @@
-set(LIBSSH_PATH "")
