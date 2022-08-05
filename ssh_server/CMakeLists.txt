@@ -6,9 +6,7 @@ add_library(
 	verify.cpp
 	connection.hpp
 	connection.cpp
+	docker.hpp
+	docker.cpp
 )
 
-
-include_directories(docker)
-add_subdirectory(docker)
-target_include_directories(docker PUBLIC docker)

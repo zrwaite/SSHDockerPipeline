@@ -1,4 +1,4 @@
-FROM gcc:11.1.0
+FROM ubuntu:latest
 
 ARG image_name
 ARG port
@@ -19,14 +19,16 @@ WORKDIR /app
 RUN set -ex; \
     apt-get update; \
     apt-get install -y cmake; \
-    apt-get install -y libssh-dev;
+    apt-get install -y clang; \
+    apt-get install -y libssh-dev; 
 
 COPY  . .
 
 RUN mkdir build \
     && cd build \
     && cmake .. \
-    && make \
-    && ./ssh_deploy
+    && make 
 
-CMD ["./build/ssh_deploy", IMAGE_NAME, PORT, SSH_HOST, SSH_PORT, SSH_USER, SSH_PASSWORD]
+# CMD ["/bin/bash"]
+
+CMD ["./build/ssh_deploy", "${image_name}", "${port}", "${ssh_host}", "${ssh_port}", "${ssh_user}", "${ssh_password}"]

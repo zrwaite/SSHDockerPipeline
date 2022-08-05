@@ -7,6 +7,7 @@ int main(int argc, char *argv[])
 {
     if (argc != 7) {
         std::cout << "Usage: " << argv[0] << " <image_name> <port> <ssh_host> <ssh_port> <ssh_user> <ssh_password>" << std::endl;
+        std::cout << "You provided " << argc-1 << " args";
         return 1;
     }
     if (!validateImageName(argv[1])) {

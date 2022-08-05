@@ -14,7 +14,6 @@ add_executable(ssh_deploy main.cpp)
 target_include_directories(ssh_server PUBLIC ssh_server)
 target_include_directories(validator PUBLIC validator)
 
-target_link_libraries(ssh_deploy docker)
 target_link_libraries(ssh_deploy ssh_server)
 target_link_libraries(ssh_deploy validator)
 target_link_libraries(ssh_deploy ssh)
