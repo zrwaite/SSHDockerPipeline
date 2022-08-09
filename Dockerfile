@@ -31,4 +31,8 @@ RUN mkdir build \
 
 # CMD ["/bin/bash"]
 
-CMD ["./build/ssh_deploy", "${image_name}", "${port}", "${ssh_host}", "${ssh_port}", "${ssh_user}", "${ssh_password}"]
+CMD ["./build/ssh_deploy", "${IMAGE_NAME}", "${PORT}", "${SSH_HOST}", "${SSH_PORT}", "${SSH_USER}", "${SSH_PASSWORD}"]
+
+# other possiblity
+
+# CMD ["sh", "-c", "./build/ssh_deploy ${IMAGE_NAME} ${PORT} ${SSH_HOST} ${SSH_PORT} ${SSH_USER} ${SSH_PASSWORD} "]
