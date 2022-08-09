@@ -29,10 +29,5 @@ RUN mkdir build \
     && cmake .. \
     && make 
 
-# CMD ["/bin/bash"]
 
-CMD ["./build/ssh_deploy", "${IMAGE_NAME}", "${PORT}", "${SSH_HOST}", "${SSH_PORT}", "${SSH_USER}", "${SSH_PASSWORD}"]
-
-# other possiblity
-
-# CMD ["sh", "-c", "./build/ssh_deploy ${IMAGE_NAME} ${PORT} ${SSH_HOST} ${SSH_PORT} ${SSH_USER} ${SSH_PASSWORD} "]
+CMD ["sh", "-c", "./build/ssh_deploy ${IMAGE_NAME} ${PORT} ${SSH_HOST} ${SSH_PORT} ${SSH_USER} ${SSH_PASSWORD} "]

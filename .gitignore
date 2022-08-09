@@ -2,3 +2,4 @@
 build
 .env.cmake
 cmake-build-debug
+testbuild2.sh
