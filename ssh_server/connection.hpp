@@ -3,7 +3,7 @@
 
 class SSHConnection {
 	public:
-        SSHConnection(std::vector<const char *> commands);
+        SSHConnection(std::vector<const char*> commands);
         ~SSHConnection();
         int connectAndRun(char* host, char* port, char* username, char* password);
 	private:

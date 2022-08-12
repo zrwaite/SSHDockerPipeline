@@ -9,6 +9,10 @@
 }
 
 int SSHConnection::connectAndRun(char *host, char *port, char *username, char *password) {
+    std::cout << "Connecting to " << username << "@" << host << ":" << port << std::endl;
+    int portInt;
+    sscanf(port, "%d", &portInt);
+
     this->session = ssh_new();
     // Tries to create ssh session
     if (this->session == NULL) {
@@ -19,6 +23,8 @@ int SSHConnection::connectAndRun(char *host, char *port, char *username, char *p
     //Adds options to the ssh session
     ssh_options_set(this->session, SSH_OPTIONS_HOST, host);
     ssh_options_set(this->session, SSH_OPTIONS_USER, username);
+    ssh_options_set(this->session, SSH_OPTIONS_PORT, &portInt);
+
 
     //Tries to connect to the host
     if (ssh_connect(this->session) != SSH_OK)
@@ -94,7 +100,6 @@ int SSHConnection::runCommand(const char* command){
         std::cout << "Command " << command << " failed" << std::endl;
         return rc;
     }
-    std::cout << "Command success" << std::endl;
     nbytes = ssh_channel_read(this->channel, buffer, sizeof(buffer), 0);
     while (nbytes > 0)
     {
@@ -106,5 +111,6 @@ int SSHConnection::runCommand(const char* command){
     }
     if (nbytes < 0) return SSH_ERROR;
     ssh_channel_send_eof(this->channel);
+    std::cout << "Command success" << std::endl;
     return SSH_OK;
 }

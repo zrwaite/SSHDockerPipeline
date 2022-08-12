@@ -46,18 +46,19 @@ int verify_host(ssh_session session)
             /* FALL THROUGH to SSH_SERVER_NOT_KNOWN behavior */
         case SSH_KNOWN_HOSTS_UNKNOWN:
             hexa = ssh_get_hexa(hash, hlen);
-            std::cout <<"The server is unknown. Do you trust the host key?\n" << std::endl;
-            std::cout << "Public key hash: %s\n" << hexa << std::endl;
-            ssh_string_free_char(hexa);
-            ssh_clean_pubkey_hash(&hash);
-            p = fgets(buf, sizeof(buf), stdin);
-            if (p == NULL) {
-                return -1;
-            }
-            cmp = strncasecmp(buf, "yes", 3);
-            if (cmp != 0) {
-                return -1;
-            }
+            std::cout << "The server is unknown, but yolo" << std::endl;
+            // std::cout <<"The server is unknown. Do you trust the host key?\n" << std::endl;
+            // std::cout << "Public key hash: %s\n" << hexa << std::endl;
+            // ssh_string_free_char(hexa);
+            // ssh_clean_pubkey_hash(&hash);
+            // p = fgets(buf, sizeof(buf), stdin);
+            // if (p == NULL) {
+            //     return -1;
+            // }
+            // cmp = strncasecmp(buf, "yes", 3);
+            // if (cmp != 0) {
+            //     return -1;
+            // }
             rc = ssh_session_update_known_hosts(session);
             if (rc < 0) {
                 std::cout << "Error %s\n" << strerror(errno) << std::endl;
