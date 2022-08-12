@@ -20,7 +20,12 @@ inputs:
   ssh_password:
     description: 'password of the ssh server'
     required: true
-
+  docker_access_token:
+    description: 'access token to pull from docker hub'
+    required: true
+  docker_user:
+    description: 'username of your docker account'
+    required: true
 
 branding: 
   icon: 'upload-cloud'
@@ -30,6 +35,8 @@ runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
+    - ${{ inputs.docker_access_token }}
+    - ${{ inputs.docker_user }}
     - ${{ inputs.image_name }}
     - ${{ inputs.port }}
     - ${{ inputs.ssh_host }}
