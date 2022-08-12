@@ -32,7 +32,9 @@ COPY  . .
 RUN mkdir build \
     && cd build \
     && cmake .. \
-    && make 
+    && make \
+    && chmod +x ./ssh_deploy
+
 
 
 CMD ["sh", "-c", "./build/ssh_deploy ${DOCKER_ACCESS_TOKEN} ${DOCKER_USER} ${IMAGE_NAME} ${PORT} ${SSH_HOST} ${SSH_PORT} ${SSH_USER} ${SSH_PASSWORD} "]
