@@ -35,4 +35,5 @@ RUN mkdir build \
     && make \
     && chmod +x ./ssh_deploy
 
-ENTRYPOINT ["sh", "-c", "./build/ssh_deploy ${DOCKER_ACCESS_TOKEN} ${DOCKER_USER} ${IMAGE_NAME} ${PORT} ${SSH_HOST} ${SSH_PORT} ${SSH_USER} ${SSH_PASSWORD} "]
+ENTRYPOINT ["app/build/ssh_deploy"]
+CMD ["sh", "-c", "${DOCKER_ACCESS_TOKEN} ${DOCKER_USER} ${IMAGE_NAME} ${PORT} ${SSH_HOST} ${SSH_PORT} ${SSH_USER} ${SSH_PASSWORD} "]
