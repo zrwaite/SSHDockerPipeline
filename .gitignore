@@ -1,5 +1,5 @@
 .DS_Store
-# build
-# .env.cmake
-# cmake-build-debug
+build
+.env.cmake
+cmake-build-debug
 testbuild2.sh
