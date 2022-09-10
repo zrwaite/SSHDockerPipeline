@@ -1,6 +1,5 @@
 FROM gcc:latest
 
-
 ARG docker_access_token
 ARG docker_user
 ARG image_name
@@ -34,7 +33,5 @@ RUN mkdir build \
     && cmake .. \
     && make \
     && chmod +x ./ssh_deploy
-
-
 
 CMD ["sh", "-c", "/app/build/ssh_deploy ${DOCKER_ACCESS_TOKEN} ${DOCKER_USER} ${IMAGE_NAME} ${PORT} ${SSH_HOST} ${SSH_PORT} ${SSH_USER} ${SSH_PASSWORD} "]
