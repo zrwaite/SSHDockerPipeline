@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM gcc:latest
 
 
 ARG docker_access_token
