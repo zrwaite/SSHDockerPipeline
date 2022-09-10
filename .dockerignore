@@ -1,5 +1,5 @@
-# build
-# cmake-build-debug
+build
+cmake-build-debug
 .idea
 .vscode
 .github
